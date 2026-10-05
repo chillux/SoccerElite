@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Soccer Elite FC — Plataforma oficial</title>
+  <meta name="description" content="Plataforma oficial de Soccer Elite FC: calendario, resultados, tabla, plantilla, noticias, partido en vivo, tienda, boletos y Academia." />
+  <meta name="theme-color" content="#0f131c" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <!-- ================= ENCABEZADO ================= -->
+  <header class="topbar">
+    <a href="#inicio" class="brand" aria-label="Inicio">
+      <img src="assets/icon.svg" alt="" width="36" height="36" />
+      <span><strong>SOCCER ELITE</strong><small>FC</small></span>
+    </a>
+    <nav class="mainnav" id="mainnav" aria-label="Principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#calendario">Calendario</a>
+      <a href="#tabla">Tabla</a>
+      <a href="#plantilla">Plantilla</a>
+      <a href="#noticias">Noticias</a>
+      <a href="#multimedia">Multimedia</a>
+      <a href="#estadisticas">Estadísticas</a>
+      <a href="#envivo">En vivo</a>
+      <a href="#foro">Foro</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#boletos">Boletos</a>
+      <a href="#academia">Academia</a>
+      <a href="#pagos">Pagos</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="notifBtn" aria-label="Activar notificaciones" title="Notificaciones">
+        <svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5.5-6.84V3a1.5 1.5 0 0 0-3 0v1.16A7 7 0 0 0 5 11v5l-2 2v1h18v-1Z"/></svg>
+        <span class="dot" id="notifDot" hidden></span>
+      </button>
+      <button class="icon-btn" id="cartBtn" aria-label="Carrito" title="Carrito">
+        <svg viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM5.2 4l.94 2H21l-3.6 7.2A2 2 0 0 1 15.6 14H8.1l-.9 1.6-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-1.76-2.96L6.6 12.6 3 4H1V2h3.27Z"/></svg>
+        <span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menú" aria-expanded="false" aria-controls="mainnav">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Banda de patrocinadores -->
+  <div class="sponsor-strip" aria-label="Patrocinadores">
+    <div class="sponsor-track" id="sponsorTrack"></div>
+  </div>
+
+  <main id="main">
+
+    <!-- ================= INICIO ================= -->
+    <section class="view" id="inicio" data-title="Inicio">
+      <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+          <p class="eyebrow" id="heroLeague"></p>
+          <h1>Pasión. Disciplina.<br /><span>Elite.</span></h1>
+          <p class="lead">Todo el club en tu celular: resultados, partido en vivo, tienda, boletos y Academia.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#boletos">Comprar boletos</a>
+            <a class="btn btn-ghost" href="#academia">Inscribirse a la Academia</a>
+          </div>
+        </div>
+        <div class="next-match card" id="nextMatch"></div>
+      </div>
+
+      <div class="grid-3 quick">
+        <a class="quick-card" href="#envivo"><span class="pulse"></span><strong>Minuto a minuto</strong><small>Sigue el partido en vivo</small></a>
+        <a class="quick-card" href="#tabla"><strong id="quickPos">—</strong><small>Posición en la tabla</small></a>
+        <a class="quick-card" href="#tienda"><strong>Tienda oficial</strong><small>Camisetas 2026</small></a>
+      </div>
+
+      <div class="section-head"><h2>Últimas noticias</h2><a href="#noticias">Ver todas →</a></div>
+      <div class="news-grid" id="homeNews"></div>
+
+      <div class="section-head"><h2>Resultados recientes</h2><a href="#calendario">Calendario →</a></div>
+      <div class="match-list" id="homeResults"></div>
+
+      <div class="ad-slot" id="adHome"></div>
+    </section>
+
+    <!-- ================= CALENDARIO ================= -->
+    <section class="view" id="calendario" data-title="Calendario y resultados">
+      <div class="page-head"><h1>Calendario y resultados</h1><p>Partidos pasados con marcador y próximos encuentros con fecha, hora y canal.</p></div>
+      <div class="tabs" role="tablist" id="calTabs">
+        <button role="tab" class="active" data-filter="upcoming">Próximos</button>
+        <button role="tab" data-filter="past">Resultados</button>
+        <button role="tab" data-filter="league">Toda la liga</button>
+      </div>
+      <div class="match-list" id="calendarList"></div>
+    </section>
+
+    <!-- ================= TABLA ================= -->
+    <section class="view" id="tabla" data-title="Tabla de posiciones">
+      <div class="page-head"><h1>Tabla de posiciones</h1><p id="tablaSub"></p></div>
+      <div class="table-wrap card">
+        <table class="standings" id="standings">
+          <thead>
+            <tr>
+              <th>#</th><th class="left">Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th>
+              <th class="hide-sm">GF</th><th class="hide-sm">GC</th><th>DG</th><th>PTS</th><th class="hide-sm">Forma</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="legend"><span class="lg lg-q"></span> Liguilla directa &nbsp; <span class="lg lg-p"></span> Repechaje</p>
+    </section>
+
+    <!-- ================= PLANTILLA ================= -->
+    <section class="view" id="plantilla" data-title="Plantilla">
+      <div class="page-head"><h1>Plantilla</h1><p>Perfiles con posición, edad, nacionalidad y estadísticas.</p></div>
+      <div class="tabs" id="posTabs">
+        <button class="active" data-pos="all">Todos</button>
+        <button data-pos="Portero">Porteros</button>
+        <button data-pos="Defensa">Defensas</button>
+        <button data-pos="Medio">Medios</button>
+        <button data-pos="Delantero">Delanteros</button>
+      </div>
+      <div class="players-grid" id="playersGrid"></div>
+    </section>
+
+    <!-- ================= NOTICIAS ================= -->
+    <section class="view" id="noticias" data-title="Noticias">
+      <div class="page-head"><h1>Noticias</h1><p>Fichajes, declaraciones, reportes médicos y crónicas.</p></div>
+      <div class="tabs" id="newsTabs"></div>
+      <div class="news-grid" id="newsGrid"></div>
+    </section>
+
+    <!-- ================= MULTIMEDIA ================= -->
+    <section class="view" id="multimedia" data-title="Multimedia">
+      <div class="page-head"><h1>Galería multimedia</h1><p>Highlights, entrevistas en zona mixta y fotografías.</p></div>
+      <div class="tabs" id="mediaTabs">
+        <button class="active" data-type="all">Todo</button>
+        <button data-type="video">Videos</button>
+        <button data-type="photo">Fotos</button>
+      </div>
+      <div class="media-grid" id="mediaGrid"></div>
+    </section>
+
+    <!-- ================= ESTADÍSTICAS ================= -->
+    <section class="view" id="estadisticas" data-title="Estadísticas">
+      <div class="page-head"><h1>Centro de estadísticas</h1><p>Posesión, remates, faltas y rendimiento histórico individual y colectivo.</p></div>
+      <div class="kpis" id="teamKpis"></div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Último partido</h3>
+          <div id="lastMatchStats"></div>
+        </div>
+        <div class="card">
+          <h3>Goles por jornada</h3>
+          <div class="bars" id="goalsChart"></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><h3>Goleadores</h3><ol class="leaders" id="topScorers"></ol></div>
+        <div class="card"><h3>Asistidores</h3><ol class="leaders" id="topAssists"></ol></div>
+      </div>
+      <div class="card">
+        <h3>Histórico de temporadas</h3>
+        <div class="table-wrap">
+          <table class="standings small">
+            <thead><tr><th class="left">Temporada</th><th>Pos.</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>PTS</th></tr></thead>
+            <tbody>
+              <tr><td class="left">Apertura 2024</td><td>4</td><td>14</td><td>7</td><td>3</td><td>4</td><td>24</td><td>17</td><td>24</td></tr>
+              <tr><td class="left">Clausura 2025</td><td>2</td><td>14</td><td>9</td><td>2</td><td>3</td><td>29</td><td>14</td><td>29</td></tr>
+              <tr><td class="left">Apertura 2025</td><td>🏆 1</td><td>14</td><td>10</td><td>3</td><td>1</td><td>33</td><td>11</td><td>33</td></tr>
+              <tr><td class="left">Clausura 2026</td><td>3</td><td>14</td><td>8</td><td>3</td><td>3</td><td>27</td><td>16</td><td>27</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EN VIVO ================= -->
+    <section class="view" id="envivo" data-title="En vivo">
+      <div class="page-head"><h1>Minuto a minuto</h1><p>Narración en tiempo real para quien no puede ver el partido por TV. <em>(Modo demostración: el partido se simula de forma acelerada).</em></p></div>
+      <div class="live card">
+        <div class="live-head">
+          <span class="live-tag" id="liveTag">PREVIA</span>
+          <span class="live-clock" id="liveClock">0'</span>
+        </div>
+        <div class="scoreboard">
+          <div class="sb-team"><div class="crest" id="liveHomeCrest"></div><span id="liveHomeName"></span></div>
+          <div class="sb-score"><span id="liveHG">0</span><i>-</i><span id="liveAG">0</span></div>
+          <div class="sb-team"><div class="crest" id="liveAwayCrest"></div><span id="liveAwayName"></span></div>
+        </div>
+        <div class="pitch" aria-hidden="true"><div class="ball" id="liveBall"></div></div>
+        <div class="live-stats" id="liveStats"></div>
+        <div class="live-controls">
+          <button class="btn btn-primary" id="liveStart">▶ Iniciar transmisión</button>
+          <button class="btn btn-ghost" id="liveReset">Reiniciar</button>
+        </div>
+      </div>
+      <ol class="timeline" id="liveFeed"></ol>
+    </section>
+
+    <!-- ================= FORO ================= -->
+    <section class="view" id="foro" data-title="Foro">
+      <div class="page-head"><h1>Foro de la afición</h1><p>Debate sobre alineaciones, el DT y rumores de fichajes. Espacio moderado: se filtran insultos automáticamente.</p></div>
+      <div class="tabs" id="forumTabs">
+        <button class="active" data-topic="Alineaciones">Alineaciones</button>
+        <button data-topic="Director técnico">Director técnico</button>
+        <button data-topic="Fichajes y rumores">Fichajes y rumores</button>
+        <button data-topic="General">General</button>
+      </div>
+      <form class="card form" id="forumForm">
+        <div class="row">
+          <label>Nombre<input name="author" required maxlength="40" placeholder="Tu nombre o apodo" /></label>
+        </div>
+        <label>Comentario<textarea name="text" required maxlength="500" rows="3" placeholder="¿Qué opinas?"></textarea></label>
+        <div class="form-foot"><small>Respeta las <a href="#" id="rulesLink">reglas de la comunidad</a>.</small><button class="btn btn-primary">Publicar</button></div>
+      </form>
+      <ul class="comments" id="comments"></ul>
+    </section>
+
+    <!-- ================= TIENDA ================= -->
+    <section class="view" id="tienda" data-title="Tienda">
+      <div class="page-head"><h1>Tienda oficial</h1><p>Camisetas, ropa de entrenamiento, accesorios y souvenirs.</p></div>
+      <div class="tabs" id="shopTabs"></div>
+      <div class="products" id="products"></div>
+    </section>
+
+    <!-- ================= BOLETOS ================= -->
+    <section class="view" id="boletos" data-title="Boletos">
+      <div class="page-head"><h1>Boletería</h1><p>Entradas para los partidos de local y abonos de temporada.</p></div>
+      <form class="card form" id="ticketForm">
+        <label>Partido
+          <select name="match" id="ticketMatch" required></select>
+        </label>
+        <fieldset>
+          <legend>Zona</legend>
+          <div class="zones" id="ticketZones"></div>
+        </fieldset>
+        <div class="row">
+          <label>Cantidad<input type="number" name="qty" min="1" max="10" value="2" required /></label>
+          <label>Nombre del titular<input name="name" required maxlength="60" /></label>
+        </div>
+        <div class="row">
+          <label>Correo<input type="email" name="email" required /></label>
+          <label>Teléfono<input type="tel" name="phone" required pattern="[\d \+\(\)\-]{10,}" /></label>
+        </div>
+        <div class="form-foot"><strong id="ticketTotal">$0</strong><button class="btn btn-primary">Continuar al pago</button></div>
+      </form>
+      <h2 class="sub">Abonos de temporada</h2>
+      <div class="grid-2" id="seasonPasses"></div>
+      <h2 class="sub">Mis boletos</h2>
+      <div id="myTickets" class="match-list"></div>
+    </section>
+
+    <!-- ================= ACADEMIA ================= -->
+    <section class="view" id="academia" data-title="Academia">
+      <div class="page-head"><h1>Academia Elite</h1><p>Registro de jugadores con fotografía, pago de inscripción y colegiatura mensual.</p></div>
+
+      <div class="kpis" id="feeCards"></div>
+
+      <div class="tabs" id="acadTabs">
+        <button class="active" data-pane="registro">Inscripción</button>
+        <button data-pane="pagos">Registrar pago</button>
+        <button data-pane="base">Base de datos</button>
+      </div>
+
+      <!-- Inscripción -->
+      <div class="pane" data-pane="registro">
+        <form class="card form" id="enrollForm">
+          <div class="photo-field">
+            <label class="photo-drop" for="enrollPhoto">
+              <img id="enrollPreview" alt="" hidden />
+              <span id="enrollPhotoTxt">📷<br />Foto del jugador</span>
+            </label>
+            <input type="file" id="enrollPhoto" accept="image/*" capture="user" hidden />
+            <div class="grow">
+              <label>Nombre completo del jugador<input name="name" required maxlength="80" /></label>
+              <div class="row">
+                <label>Fecha de nacimiento<input type="date" name="dob" required /></label>
+                <label>Categoría<select name="cat" id="enrollCat" required></select></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label>Posición preferida
+              <select name="pos"><option>Portero</option><option>Defensa</option><option selected>Medio</option><option>Delantero</option></select>
+            </label>
+            <label>CURP (opcional)<input name="curp" maxlength="18" style="text-transform:uppercase" /></label>
+          </div>
+          <div class="row">
+            <label>Padre, madre o tutor<input name="tutor" required maxlength="80" /></label>
+            <label>Teléfono de contacto<input type="tel" name="phone" required pattern="[\d \+\(\)\-]{10,}" /></label>
+          </div>
+          <div class="row">
+            <label>Correo<input type="email" name="email" required /></label>
+            <label>Tipo de sangre / alergias<input name="medical" maxlength="80" placeholder="O+, sin alergias" /></label>
+          </div>
+          <label class="check"><input type="checkbox" name="uniform" /> Agregar uniforme oficial (<span id="uniformPrice"></span>)</label>
+          <label class="check"><input type="checkbox" required /> Acepto el reglamento de la Academia y el aviso de privacidad.</label>
+          <div class="form-foot"><strong id="enrollTotal"></strong><button class="btn btn-primary">Inscribir y pagar</button></div>
+        </form>
+      </div>
+
+      <!-- Registrar pago de colegiatura -->
+      <div class="pane" data-pane="pagos" hidden>
+        <form class="card form" id="tuitionForm">
+          <label>Jugador<select name="player" id="tuitionPlayer" required></select></label>
+          <div class="row">
+            <label>Concepto
+              <select name="concept" id="tuitionConcept">
+                <option value="colegiatura">Colegiatura mensual</option>
+                <option value="inscripcion">Inscripción</option>
+                <option value="uniforme">Uniforme</option>
+              </select>
+            </label>
+            <label>Mes<select name="month" id="tuitionMonth"></select></label>
+          </div>
+          <p class="hint" id="tuitionEmpty" hidden>Aún no hay jugadores inscritos. Primero completa la inscripción.</p>
+          <div class="form-foot"><strong id="tuitionTotal"></strong><button class="btn btn-primary">Generar referencia de pago</button></div>
+        </form>
+      </div>
+
+      <!-- Base de datos -->
+      <div class="pane" data-pane="base" hidden>
+        <div class="toolbar">
+          <input type="search" id="dbSearch" placeholder="Buscar jugador, tutor o categoría…" />
+          <select id="dbFilter">
+            <option value="all">Todos</option>
+            <option value="aldia">Al corriente</option>
+            <option value="adeudo">Con adeudo</option>
+          </select>
+          <button class="btn btn-ghost" id="dbExport">Exportar CSV</button>
+        </div>
+        <div class="roster" id="roster"></div>
+      </div>
+    </section>
+
+    <!-- ================= PAGOS ================= -->
+    <section class="view" id="pagos" data-title="Pagos">
+      <div class="page-head"><h1>Formas de pago</h1><p>Transferencia SPEI o depósito en ventanilla / tiendas con servicio Banco Azteca.</p></div>
+      <div class="bank-card" id="bankCard"></div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>¿Cómo pagar?</h3>
+          <ol class="steps">
+            <li>Genera tu pedido (tienda, boletos o Academia) y anota tu <strong>referencia</strong>.</li>
+            <li>Transfiere a la <strong>CLABE</strong> desde tu app bancaria o deposita al número de <strong>cuenta</strong>.</li>
+            <li>Escribe la referencia en el <strong>concepto</strong> de la transferencia.</li>
+            <li>Envía tu comprobante por WhatsApp o súbelo en “Mis pagos”.</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Mis pagos</h3>
+          <ul class="payments" id="paymentsList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= REDES ================= -->
+    <section class="social-block">
+      <h2>Síguenos</h2>
+      <div class="social" id="socialLinks"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <strong>Soccer Elite FC</strong>
+      <p id="footerInfo"></p>
+    </div>
+    <div class="footer-links">
+      <a href="#pagos">Pagos</a><a href="#academia">Academia</a><a href="#boletos">Boletos</a><a href="#tienda">Tienda</a>
+    </div>
+    <small>© <span id="year"></span> Soccer Elite FC. Todos los derechos reservados.</small>
+  </footer>
+
+  <!-- Navegación inferior (móvil) -->
+  <nav class="bottomnav" aria-label="Accesos rápidos">
+    <a href="#inicio"><svg viewBox="0 0 24 24"><path d="M12 3 2 12h3v8h6v-6h2v6h6v-8h3z"/></svg>Inicio</a>
+    <a href="#calendario"><svg viewBox="0 0 24 24"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2zm-2 8h14v10H5z"/></svg>Partidos</a>
+    <a href="#envivo" class="live-link"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>En vivo</a>
+    <a href="#tienda"><svg viewBox="0 0 24 24"><path d="M16 3 12 5 8 3 2 6l2 5 2-1v11h12V10l2 1 2-5z"/></svg>Tienda</a>
+    <a href="#academia"><svg viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.9V17h2V9zm-7 9.2V16l7 4 7-4v-3.8L12 16z"/></svg>Academia</a>
+  </nav>
+
+  <!-- Panel lateral del carrito -->
+  <aside class="drawer" id="cartDrawer" aria-hidden="true" aria-label="Carrito">
+    <div class="drawer-head"><h2>Carrito</h2><button class="icon-btn" data-close aria-label="Cerrar">✕</button></div>
+    <ul class="cart-items" id="cartItems"></ul>
+    <div class="drawer-foot">
+      <div class="total-row"><span>Total</span><strong id="cartTotal">$0</strong></div>
+      <button class="btn btn-primary block" id="checkoutBtn">Pagar por transferencia</button>
+    </div>
+  </aside>
+
+  <!-- Modal genérico -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-box">
+      <button class="icon-btn modal-close" data-close aria-label="Cerrar">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+  <div class="backdrop" id="backdrop" hidden></div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

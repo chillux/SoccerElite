@@ -1,0 +1,15 @@
+{
+  "name": "Soccer Elite FC",
+  "short_name": "Soccer Elite",
+  "description": "Plataforma oficial de Soccer Elite FC",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0f17",
+  "theme_color": "#0b0f17",
+  "lang": "es-MX",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
